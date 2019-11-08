@@ -14,7 +14,7 @@ For training purposes, all rows from the raw data assigned "CANDIDATE" have been
 
 ### Preprocess the Data
 
-In file The mean and standard devation was calculated for each independent field by koi_disposition ("CONFIRMED", "FALSE POSITIVE"). A histrogram for each independent variables was generated. See jupyter notebook (https://github.com/chrisholt0222/machine-learning-challenge/blob/master/initial_models/model_logreg.ipynb).
+The mean and standard devation was calculated for each independent field by koi_disposition ("CONFIRMED", "FALSE POSITIVE"). A histrogram for each independent variables was generated. Based on the review of the mean, the standard devation, and the histograms the following variables koi_period_err2, koi_time0bk_err2, koi_duration_err2, koi_depth_err2 were removed. See Jupyter Notebook (https://github.com/chrisholt0222/machine-learning-challenge/blob/master/initial_models/model_logreg.ipynb).
 
 #### Fields 1 - 16:
 ![Group1.jpg](initial_models/Images/feature_hist_0_15.png)
@@ -23,18 +23,25 @@ In file The mean and standard devation was calculated for each independent field
 ![Group2.jpg](initial_models/Images/feature_hist_16_31.png)
 
 #### Fields 33 - 40:
-![Group3.jpg](initial_models/Images/feature_hist_32_40.png)
+![Group3.jpg](initial_models/Images/feature_hist_32_39.png)
 
-The following fields were dropped: koi_period_err2, koi_time0bk_err2, koi_duration_err2, koi_depth_err2.
 
 The following was applied to the data before use in each model:
 * NAs were removed.
 * Drop all rows where koi_disposition = "CANDIDATE".
 * Drop the fields: koi_period_err2, koi_time0bk_err2, koi_duration_err2, koi_depth_err2.
-* Use `MinMaxScaler` to scale the numerical data.
-* Separate the data into training and testing data.
+* The data was separated into training and testing data using the `train_test_split` function.
+* The `MinMaxScaler` function is used to scale the numerical independent data.
+* The `LabelEncoder` and `to_categorical` were used to cattegorize the dependend variable.
 
-Perform feature selection and remove unnecessary features.
+### Feature Selection - RFE
+
+The RFE function (recursive feature elimination) was used with the LogisticRegression model to eliminate unnecesasry features (independent variables). Features ranked below 1 where removed from future models. 
+
+Field removed:
+* koi_period_err1, koi_time0bk, koi_impact, koi_impact_err1, koi_impact_err2, koi_duration,
+* koi_depth_err1, koi_prad, koi_prad_err1, koi_prad_err2, koi_insol, koi_insol_err1, 
+* koi_insol_err2, koi_srad, koi_srad_err1, koi_srad_err2, dec, koi_kepmag
 
 ### Tune Model Parameters
 
@@ -43,6 +50,6 @@ Perform feature selection and remove unnecessary features.
 
 ### Reporting
 
-* Create a README that reports a comparison of each model's performance as well as a summary about your findings and any assumptions you can make based on your model (is your model good enough to predict new exoplanets? Why or why not? What would make your model be better at predicting new exoplanets?)
+* Create a README that reports a comparison of each models performance as well as a summary about your findings and any assumptions you can make based on your model (is your model good enough to predict new exoplanets? Why or why not? What would make your model be better at predicting new exoplanets?)
 
 
