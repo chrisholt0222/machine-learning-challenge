@@ -6,19 +6,35 @@
 
 Over a period of nine years in deep space, the NASA Kepler space telescope has been out on a planet-hunting mission to discover hidden planets outside of our solar system. The project goal is to develop machine learning models capable of classifying candidate exoplanets from the raw dataset.
 
-The field [koi_disposition] 
- "CONFIRMED": objects confirmed to be exoplanets.
- "CANDIDATE": have not yet been formally classified
-"FALSE POSITIVE" objects determined not to be exoplanets.
-Hence, drop "CANDIDATE" rows for training models
-
+The field: koi_disposition (depenendent variable) contains the assigned disposition of each observation in the raw data. The assigned disposition has the following options: 
+ * "CONFIRMED": object confirmed to be exoplanets.
+ * "CANDIDATE": have not yet been formally classified.
+ * "FALSE POSITIVE" objects determined not to be exoplanets.
+For training purposes, all rows from the raw data assigned "CANDIDATE" have been dropped. 
 
 ### Preprocess the Data
 
-* Preprocess the dataset prior to fitting the model.
-* Perform feature selection and remove unnecessary features.
+In file The mean and standard devation was calculated for each independent field by koi_disposition ("CONFIRMED", "FALSE POSITIVE"). A histrogram for each independent variables was generated.
+
+Fields 1 - 16:
+![Group1.jpg](initial_models/Images/feature_hist_0_15.jpg)
+
+Fields 17 - 32:
+![Group2.jpg](initial_models/Images/feature_hist_16_31.jpg)
+
+Fields 33 - 40:
+![Group3.jpg](initial_models/Images/feature_hist_32_40.jpg)
+
+The following fields were dropped: koi_period_err2, koi_time0bk_err2, koi_duration_err2, koi_depth_err2.
+
+The following was applied to the data before use in each model:
+* NAs were removed.
+* Drop all rows where koi_disposition = "CANDIDATE".
+* Drop the fields: koi_period_err2, koi_time0bk_err2, koi_duration_err2, koi_depth_err2.
 * Use `MinMaxScaler` to scale the numerical data.
 * Separate the data into training and testing data.
+
+Perform feature selection and remove unnecessary features.
 
 ### Tune Model Parameters
 
