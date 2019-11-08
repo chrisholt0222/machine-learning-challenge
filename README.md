@@ -25,10 +25,9 @@ The mean and standard devation was calculated for each independent field by koi_
 #### Fields 33 - 40:
 ![Group3.jpg](initial_models/Images/feature_hist_32_39.png)
 
-
 The following was applied to the data before use in each model:
 * NAs were removed.
-* Drop all rows where koi_disposition = "CANDIDATE".
+* Drop all rows were koi_disposition = "CANDIDATE".
 * Drop the fields: koi_period_err2, koi_time0bk_err2, koi_duration_err2, koi_depth_err2.
 * The data was separated into training and testing data using the `train_test_split` function.
 * The `MinMaxScaler` function is used to scale the numerical independent data.
@@ -45,11 +44,14 @@ Field removed:
 
 ### Tune Model Parameters
 
-* Use `GridSearch` to tune model parameters.
-* Tune and compare at least two different classifiers.
+* The `GridSearch` fundtion was applied to the following models: `SVC` (support vector machine) and `Sequential` (neural network) to tune model parameters for each model.
 
-### Reporting
+### Results
 
-* Create a README that reports a comparison of each models performance as well as a summary about your findings and any assumptions you can make based on your model (is your model good enough to predict new exoplanets? Why or why not? What would make your model be better at predicting new exoplanets?)
+The inital model was a binary classifier using logistic regression without scaling the independent data. The model yielded predictive accuracy of approximately 0.661 on the testing data. Using MinMaxScaler to scale the independent varialbes, the result of the logistice regression model inmproved to 0.990. After removing the unneccessary features, the model test results are unchanged, 0.990.
 
+The next two model are applied to the fully transformed and reduced data. 
 
+Usnig a Support Vector Machine (SVM), the reasults are similar at 0.9902. Tuning the hyperparameters C and Gamma using `GridsearchCV`, the best model is C = 1.0 , and Gamma = 0.0001, with a predictive accuracy of 0.9904.
+
+A `Sequential` model achieved a predictive accuracy score of 0.9904 on the test data. This model used the `adam` optimizer, the `categorical crossentropy` loss function and two hidden layers with 40 and 20 nodes. The `GridsearchCV` selected the parameters: batch_size = 20, epochs = 100, and optimizer = RMSprop.
