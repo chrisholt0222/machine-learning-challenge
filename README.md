@@ -17,13 +17,13 @@ For training purposes, all rows from the raw data assigned "CANDIDATE" have been
 In file The mean and standard devation was calculated for each independent field by koi_disposition ("CONFIRMED", "FALSE POSITIVE"). A histrogram for each independent variables was generated.
 
 Fields 1 - 16:
-![Group1.jpg](initial_models/Images/feature_hist_0_15.jpg)
+![Group1.jpg](initial_models/Images/feature_hist_0_15.png)
 
 Fields 17 - 32:
-![Group2.jpg](initial_models/Images/feature_hist_16_31.jpg)
+![Group2.jpg](initial_models/Images/feature_hist_16_31.png)
 
 Fields 33 - 40:
-![Group3.jpg](initial_models/Images/feature_hist_32_40.jpg)
+![Group3.jpg](initial_models/Images/feature_hist_32_40.png)
 
 The following fields were dropped: koi_period_err2, koi_time0bk_err2, koi_duration_err2, koi_depth_err2.
 
