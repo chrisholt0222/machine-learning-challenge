@@ -12,11 +12,15 @@ The field: koi_disposition (depenendent variable) contains the assigned disposit
  * "FALSE POSITIVE" objects determined not to be exoplanets.
 For training purposes, all rows from the raw data assigned "CANDIDATE" have been dropped. 
 
-## Final Model
+## Results
+
+Using a logistic regression, a svm, and a neural network model (trained on "CONFIRMED" and "FALSE POSITIVE" records), the "CANDIDATE" records were assigned to either "CONFIRMED" (an exoplanet) and "FALSE POSITIVE" (not an exoplanet). The "Final_Selected" reulst was selected off the neural network model (the best accuray at 0.9917). These results are stored in (https://github.com/chrisholt0222/machine-learning-challenge/blob/master/candidates.csv).
+
+The jupyter notebook: (https://github.com/chrisholt0222/machine-learning-challenge/blob/master/model_final.ipynb) loads each of the models and applies the scalers to predict the exoplant classification of each "CANDIDATE" record.
 
 ### Preprocess the Data
 
-The mean and standard devation was calculated for each independent field by koi_disposition ("CONFIRMED", "FALSE POSITIVE"). A histrogram for each independent variables was generated. Based on the review of the mean, the standard devation, and the histograms the following variables koi_period_err2, koi_time0bk_err2, koi_duration_err2, koi_depth_err2 were removed. See Jupyter Notebook (https://github.com/chrisholt0222/machine-learning-challenge/tree/master/models_outcomes2).
+The mean and standard devation was calculated for each independent field by koi_disposition ("CONFIRMED", "FALSE POSITIVE"). A histrogram for each independent variables was generated. Based on the review of the mean, the standard devation, and the histograms the following variables koi_period_err2, koi_time0bk_err2, koi_duration_err2, koi_depth_err2 were removed. See Jupyter Notebooks for each model: logistic regression, svm, neural networks - (https://github.com/chrisholt0222/machine-learning-challenge/tree/master/models_outcomes2). The logistic regression model, model_logreg.ipynb, contains the independent variable (or feature) review along with the recursive feature elimination process.
 
 #### Fields 1 - 16:
 ![Group1.jpg](initial_models/Images/feature_hist_0_15.png)
@@ -39,21 +43,18 @@ The following was applied to the data before use in each model:
 
 The RFE function (recursive feature elimination) was used with the LogisticRegression model to eliminate unnecesasry features (independent variables). Features ranked below 1 where removed from future models. 
 
-Field removed:
-* koi_period_err1, koi_time0bk, koi_impact, koi_impact_err1, koi_impact_err2, koi_duration,
-* koi_depth_err1, koi_prad, koi_prad_err1, koi_prad_err2, koi_insol, koi_insol_err1, 
-* koi_insol_err2, koi_srad, koi_srad_err1, koi_srad_err2, dec, koi_kepmag
-
 ### Tune Model Parameters
 
 * The `GridSearch` fundtion was applied to the following models: `SVC` (support vector machine) and `Sequential` (neural network) to tune model parameters for each model.
 
-### Results
+### Analysis
 
-The inital model was a binary classifier using logistic regression without scaling the independent data. The model yielded predictive accuracy of approximately 0.661 on the testing data. Using MinMaxScaler to scale the independent varialbes, the result of the logistice regression model inmproved to 0.990. After removing the unneccessary features, the model test results are unchanged, 0.990.
+The inital model was a binary classifier using logistic regression without scaling the independent data. The model yielded predictive accuracy of approximately 0.6606 on the testing data. Using MinMaxScaler to scale the independent varialbes, the result of the logistice regression model inmproved to 0.9902. After applying the feature elimination, the model test results are unchanged, 0.9902.
 
 The next two model are applied to the fully transformed and reduced data. 
 
-Usnig a Support Vector Machine (SVM), the reasults are similar at 0.9902. Tuning the hyperparameters C and Gamma using `GridsearchCV`, the best model is C = 1.0 , and Gamma = 0.0001, with a predictive accuracy of 0.9904.
+Usnig a Support Vector Machine (SVM), the reasults are similar at 0.9902. Tuning the hyperparameters C and Gamma using `GridsearchCV`, the best model is C = 1.0 , and Gamma = 0.0001, with a predictive accuracy of 0.9902 on the testing data. No real change from the initial model.
 
-A `Sequential` model achieved a predictive accuracy score of 0.9904 on the test data. This model used the `adam` optimizer, the `categorical crossentropy` loss function and two hidden layers with 40 and 20 nodes. The `GridsearchCV` selected the parameters: batch_size = 20, epochs = 100, and optimizer = RMSprop.
+A `Sequential` model achieved a predictive accuracy score of 0.9917 on the test data. This model used the `adam` optimizer, the `categorical crossentropy` loss function and two hidden layers with 40 and 20 nodes. Using `GridsearchCV` with option for the parameters: batch_size, epochs, and optimizer did not improve the results.
+
+The selected model is the `Sequential`.
