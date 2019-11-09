@@ -12,9 +12,11 @@ The field: koi_disposition (depenendent variable) contains the assigned disposit
  * "FALSE POSITIVE" objects determined not to be exoplanets.
 For training purposes, all rows from the raw data assigned "CANDIDATE" have been dropped. 
 
+## Final Model
+
 ### Preprocess the Data
 
-The mean and standard devation was calculated for each independent field by koi_disposition ("CONFIRMED", "FALSE POSITIVE"). A histrogram for each independent variables was generated. Based on the review of the mean, the standard devation, and the histograms the following variables koi_period_err2, koi_time0bk_err2, koi_duration_err2, koi_depth_err2 were removed. See Jupyter Notebook (https://github.com/chrisholt0222/machine-learning-challenge/blob/master/initial_models/model_logreg.ipynb).
+The mean and standard devation was calculated for each independent field by koi_disposition ("CONFIRMED", "FALSE POSITIVE"). A histrogram for each independent variables was generated. Based on the review of the mean, the standard devation, and the histograms the following variables koi_period_err2, koi_time0bk_err2, koi_duration_err2, koi_depth_err2 were removed. See Jupyter Notebook (https://github.com/chrisholt0222/machine-learning-challenge/tree/master/models_outcomes2).
 
 #### Fields 1 - 16:
 ![Group1.jpg](initial_models/Images/feature_hist_0_15.png)
