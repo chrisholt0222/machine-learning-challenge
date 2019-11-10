@@ -55,7 +55,7 @@ The inital model was a binary classifier using logistic regression without scali
 
 The next two model are applied to the fully transformed and reduced data. 
 
-Usnig a Support Vector Machine (SVM), the reasults are similar at 0.9902. Tuning the hyperparameters C and Gamma using `GridsearchCV`, the best model is C = 1.0 , and Gamma = 0.0001, with a predictive accuracy of 0.9902 on the testing data. No real change from the initial SVM model.
+Usnig a Support Vector Machine (SVM), the reasults are similar at 0.9902. Tuning the hyperparameters C and Gamma using `GridsearchCV`, the best model is C = 1.0, and Gamma = 0.0001, with a predictive accuracy of 0.9902 on the testing data. No real change from the initial SVM model.
 
 A `Sequential` model achieved a predictive accuracy score of 0.9917 on the test data. This model used the `adam` optimizer, the `categorical crossentropy` loss function and two hidden layers with 40 and 20 nodes. Using `GridsearchCV` with option for the parameters: batch_size, epochs, and optimizer did not improve the results.
 
